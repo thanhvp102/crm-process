@@ -22,23 +22,23 @@ import java.sql.ResultSet;
 @Slf4j
 public class ImportDataOraFile {
     //@Scheduled(cron = "0 0 1 * * ?",zone ="Asia/Bangkok")
-    public static void importDataOraFile() {
-        try {
-            Connection connection = null;
-            PreparedStatement pstmt = null;
-            ResultSet resultSet = null;
-            connection = DatabaseORAUtility.getConnection();
-            pstmt = connection.prepareStatement("select * from CDR_WHITELIST_202204");
-
-            log.info("The Connection Object is of Class: " + connection.getClass());
-
-            resultSet = pstmt.executeQuery();
-            while (resultSet.next()) {
-                log.info(resultSet.getString(1) + "," + resultSet.getString(2) + "," + resultSet.getString(3));
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void importDataOraFile() {
+//        try {
+//            Connection connection = null;
+//            PreparedStatement pstmt = null;
+//            ResultSet resultSet = null;
+//            connection = DatabaseORAUtility.getConnection();
+//            pstmt = connection.prepareStatement("select * from CDR_WHITELIST_202204");
+//
+//            log.info("The Connection Object is of Class: " + connection.getClass());
+//
+//            resultSet = pstmt.executeQuery();
+//            while (resultSet.next()) {
+//                log.info(resultSet.getString(1) + "," + resultSet.getString(2) + "," + resultSet.getString(3));
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

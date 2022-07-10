@@ -45,25 +45,25 @@ public class ImportDataFile {
 //
 //
     //@Scheduled(cron = "0 0 1 * * ?",zone ="Asia/Bangkok")
-    public static void importDataFile() throws SQLException {
-        Connection connection = null;
-        PreparedStatement pstmt = null;
-        ResultSet resultSet = null;
-        try {
-            connection = DatabaseORAUtility.getConnection();
-            pstmt = connection.prepareStatement("SELECT 1 FROM dual");
-
-            log.info("The Connection Object is of Class: " + connection.getClass());
-
-            resultSet = pstmt.executeQuery();
-            while (resultSet.next()) {
-                log.info(resultSet.getString(1) + "," + resultSet.getString(2) + "," + resultSet.getString(3));
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void importDataFile() throws SQLException {
+//        Connection connection = null;
+//        PreparedStatement pstmt = null;
+//        ResultSet resultSet = null;
+//        try {
+//            connection = DatabaseORAUtility.getConnection();
+//            pstmt = connection.prepareStatement("SELECT 1 FROM dual");
+//
+//            log.info("The Connection Object is of Class: " + connection.getClass());
+//
+//            resultSet = pstmt.executeQuery();
+//            while (resultSet.next()) {
+//                log.info(resultSet.getString(1) + "," + resultSet.getString(2) + "," + resultSet.getString(3));
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Scheduled(cron = "0 0 * ? * *",zone ="Asia/Bangkok")
     public void checkProcess(){

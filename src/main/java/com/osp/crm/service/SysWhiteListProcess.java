@@ -28,95 +28,98 @@ import java.util.Properties;
 public class SysWhiteListProcess {
 
     static CdrWhitelistDAO cdrWhitelistDAO = new CdrWhitelistDAO();
-    private static List<String> partitions = new ArrayList();
 
-    static {
-        partitions.add("CDR_WHITELIST_P_PL");
-        partitions.add("CDR_WHITELIST_P_SL");
-        partitions.add("CDR_WHITELIST_P_0");
-        partitions.add("CDR_WHITELIST_P_1");
-        partitions.add("CDR_WHITELIST_P_2");
-        partitions.add("CDR_WHITELIST_P_3");
-        partitions.add("CDR_WHITELIST_P_4");
-        partitions.add("CDR_WHITELIST_P_5");
-        partitions.add("CDR_WHITELIST_P_6");
-        partitions.add("CDR_WHITELIST_P_7");
-        partitions.add("CDR_WHITELIST_P_8");
-        partitions.add("CDR_WHITELIST_P_9");
-        partitions.add("CDR_WHITELIST_P_A");
-        partitions.add("CDR_WHITELIST_P_B");
-        partitions.add("CDR_WHITELIST_P_C");
-        partitions.add("CDR_WHITELIST_P_D");
-        partitions.add("CDR_WHITELIST_P_E");
-        partitions.add("CDR_WHITELIST_P_F");
-        partitions.add("CDR_WHITELIST_P_G");
-        partitions.add("CDR_WHITELIST_P_H");
-        partitions.add("CDR_WHITELIST_P_I");
-        partitions.add("CDR_WHITELIST_P_J");
-        partitions.add("CDR_WHITELIST_P_K");
-        partitions.add("CDR_WHITELIST_P_L");
-        partitions.add("CDR_WHITELIST_P_M");
-        partitions.add("CDR_WHITELIST_P_N");
-        partitions.add("CDR_WHITELIST_P_O");
-        partitions.add("CDR_WHITELIST_P_P");
-        partitions.add("CDR_WHITELIST_P_Q");
-        partitions.add("CDR_WHITELIST_P_R");
-        partitions.add("CDR_WHITELIST_P_S");
-        partitions.add("CDR_WHITELIST_P_T");
-        partitions.add("CDR_WHITELIST_P_U");
-        partitions.add("CDR_WHITELIST_P_V");
-        partitions.add("CDR_WHITELIST_P_W");
-        partitions.add("CDR_WHITELIST_P_X");
-        partitions.add("CDR_WHITELIST_P_Y");
-        partitions.add("CDR_WHITELIST_P_Z");
-        partitions.add("CDR_WHITELIST_PL_A");
-        partitions.add("CDR_WHITELIST_PL_B");
-        partitions.add("CDR_WHITELIST_PL_C");
-        partitions.add("CDR_WHITELIST_PL_D");
-        partitions.add("CDR_WHITELIST_PL_E");
-        partitions.add("CDR_WHITELIST_PL_F");
-        partitions.add("CDR_WHITELIST_PL_G");
-        partitions.add("CDR_WHITELIST_PL_H");
-        partitions.add("CDR_WHITELIST_PL_I");
-        partitions.add("CDR_WHITELIST_PL_J");
-        partitions.add("CDR_WHITELIST_PL_K");
-        partitions.add("CDR_WHITELIST_PL_L");
-        partitions.add("CDR_WHITELIST_PL_M");
-        partitions.add("CDR_WHITELIST_PL_N");
-        partitions.add("CDR_WHITELIST_PL_O");
-        partitions.add("CDR_WHITELIST_PL_P");
-        partitions.add("CDR_WHITELIST_PL_Q");
-        partitions.add("CDR_WHITELIST_PL_R");
-        partitions.add("CDR_WHITELIST_PL_S");
-        partitions.add("CDR_WHITELIST_PL_T");
-        partitions.add("CDR_WHITELIST_PL_U");
-        partitions.add("CDR_WHITELIST_PL_V");
-        partitions.add("CDR_WHITELIST_PL_W");
-        partitions.add("CDR_WHITELIST_PL_X");
-        partitions.add("CDR_WHITELIST_PL_Y");
-        partitions.add("CDR_WHITELIST_PL_Z");
+    private  List<String>  loadPartition() {
+        List<String>  partitions=new ArrayList<>();
+        partitions.add("SYNC_CDR_WHITELIST_P_PL");
+        partitions.add("SYNC_CDR_WHITELIST_P_SL");
+        partitions.add("SYNC_CDR_WHITELIST_P_0");
+        partitions.add("SYNC_CDR_WHITELIST_P_1");
+        partitions.add("SYNC_CDR_WHITELIST_P_2");
+        partitions.add("SYNC_CDR_WHITELIST_P_3");
+        partitions.add("SYNC_CDR_WHITELIST_P_4");
+        partitions.add("SYNC_CDR_WHITELIST_P_5");
+        partitions.add("SYNC_CDR_WHITELIST_P_6");
+        partitions.add("SYNC_CDR_WHITELIST_P_7");
+        partitions.add("SYNC_CDR_WHITELIST_P_8");
+        partitions.add("SYNC_CDR_WHITELIST_P_9");
+        partitions.add("SYNC_CDR_WHITELIST_P_A");
+        partitions.add("SYNC_CDR_WHITELIST_P_B");
+        partitions.add("SYNC_CDR_WHITELIST_P_C");
+        partitions.add("SYNC_CDR_WHITELIST_P_D");
+        partitions.add("SYNC_CDR_WHITELIST_P_E");
+        partitions.add("SYNC_CDR_WHITELIST_P_F");
+        partitions.add("SYNC_CDR_WHITELIST_P_G");
+        partitions.add("SYNC_CDR_WHITELIST_P_H");
+        partitions.add("SYNC_CDR_WHITELIST_P_I");
+        partitions.add("SYNC_CDR_WHITELIST_P_J");
+        partitions.add("SYNC_CDR_WHITELIST_P_K");
+        partitions.add("SYNC_CDR_WHITELIST_P_L");
+        partitions.add("SYNC_CDR_WHITELIST_P_M");
+        partitions.add("SYNC_CDR_WHITELIST_P_N");
+        partitions.add("SYNC_CDR_WHITELIST_P_O");
+        partitions.add("SYNC_CDR_WHITELIST_P_P");
+        partitions.add("SYNC_CDR_WHITELIST_P_Q");
+        partitions.add("SYNC_CDR_WHITELIST_P_R");
+        partitions.add("SYNC_CDR_WHITELIST_P_S");
+        partitions.add("SYNC_CDR_WHITELIST_P_T");
+        partitions.add("SYNC_CDR_WHITELIST_P_U");
+        partitions.add("SYNC_CDR_WHITELIST_P_V");
+        partitions.add("SYNC_CDR_WHITELIST_P_W");
+        partitions.add("SYNC_CDR_WHITELIST_P_X");
+        partitions.add("SYNC_CDR_WHITELIST_P_Y");
+        partitions.add("SYNC_CDR_WHITELIST_P_Z");
+        partitions.add("SYNC_CDR_WHITELIST_PL_A");
+        partitions.add("SYNC_CDR_WHITELIST_PL_B");
+        partitions.add("SYNC_CDR_WHITELIST_PL_C");
+        partitions.add("SYNC_CDR_WHITELIST_PL_D");
+        partitions.add("SYNC_CDR_WHITELIST_PL_E");
+        partitions.add("SYNC_CDR_WHITELIST_PL_F");
+        partitions.add("SYNC_CDR_WHITELIST_PL_G");
+        partitions.add("SYNC_CDR_WHITELIST_PL_H");
+        partitions.add("SYNC_CDR_WHITELIST_PL_I");
+        partitions.add("SYNC_CDR_WHITELIST_PL_J");
+        partitions.add("SYNC_CDR_WHITELIST_PL_K");
+        partitions.add("SYNC_CDR_WHITELIST_PL_L");
+        partitions.add("SYNC_CDR_WHITELIST_PL_M");
+        partitions.add("SYNC_CDR_WHITELIST_PL_N");
+        partitions.add("SYNC_CDR_WHITELIST_PL_O");
+        partitions.add("SYNC_CDR_WHITELIST_PL_P");
+        partitions.add("SYNC_CDR_WHITELIST_PL_Q");
+        partitions.add("SYNC_CDR_WHITELIST_PL_R");
+        partitions.add("SYNC_CDR_WHITELIST_PL_S");
+        partitions.add("SYNC_CDR_WHITELIST_PL_T");
+        partitions.add("SYNC_CDR_WHITELIST_PL_U");
+        partitions.add("SYNC_CDR_WHITELIST_PL_V");
+        partitions.add("SYNC_CDR_WHITELIST_PL_W");
+        partitions.add("SYNC_CDR_WHITELIST_PL_X");
+        partitions.add("SYNC_CDR_WHITELIST_PL_Y");
+        partitions.add("SYNC_CDR_WHITELIST_PL_Z");
+        return partitions;
     }
 
     //@Scheduled(cron = "0 0 23 25 * ?",zone ="Asia/Bangkok")
     @Scheduled(fixedDelay = 864000000)
-    public static void sysWhiteListProcess() {
+    public void sysWhiteListProcess() {
         try {
 //            List<CdrWhiteListView> cdrWhiteListViews =  cdrWhitelistDAO.syncDataWhiteList();
 //            if(cdrWhiteListViews!=null && cdrWhiteListViews.size()>0){
 //                cdrWhitelistDAO.insertCdrWhiteListBatch(cdrWhiteListViews);
 //            }
             loadProperties();
+            List<String> partitions =loadPartition();
+
             SimpleDateFormat yyyyMM = new SimpleDateFormat("yyyyMM");
-            String configWhiteList=CDR_WHITELIST;
-            configWhiteList=("".equals(configWhiteList)) ? yyyyMM.format(new Date()) :configWhiteList;
+            String configWhiteList = CDR_WHITELIST;
+            configWhiteList = ("".equals(configWhiteList)) ? yyyyMM.format(new Date()) : configWhiteList;
             try {
-                for (int i = 0; i < partitions.size(); i++) {
-                    log.info("sysWhiteListProcess " + partitions.get(i));
-                    List<CdrWhiteListView> cdrWhiteListViews =cdrWhitelistDAO.syncCdrByPartitionConfig(partitions.get(i),CDR_WHITELIST);
-                    String insertWhiteList="INSERT INTO cdr_whitelist_"+configWhiteList+" PARTITION (part"+i+") (msisdn_id, gen_date, type_wl, type, msisdn ) VALUES (?, CURDATE() , ?, ?, ? )";
+                while (partitions.size()!=0) {
+                    log.info("sysWhiteListProcess " + partitions.get(0));
+                    List<CdrWhiteListView> cdrWhiteListViews = cdrWhitelistDAO.syncCdrByPartitionConfig(partitions.get(0), CDR_WHITELIST);
+                    String insertWhiteList = "INSERT INTO cdr_whitelist_" + configWhiteList + "(msisdn_id, gen_date, type_wl, type, msisdn ) VALUES (?, CURDATE() , ?, ?, ? )";
                     log.info(insertWhiteList);
                     if (cdrWhiteListViews != null && cdrWhiteListViews.size() > 0) {
-                        cdrWhitelistDAO.insertCdrWhiteListBatchConfig(insertWhiteList,cdrWhiteListViews);
+                        cdrWhitelistDAO.insertCdrWhiteListBatchConfig(insertWhiteList, cdrWhiteListViews,partitions);
                     }
                 }
             } catch (Exception e) {

@@ -69,7 +69,7 @@ public class SpMappingMsisdnDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }finally{
-            DatabaseORAUtility.releaseAll(connection, pstmt, resultSet);
+//            DatabaseORAUtility.releaseAll(connection, pstmt, resultSet);
         }
     }
 

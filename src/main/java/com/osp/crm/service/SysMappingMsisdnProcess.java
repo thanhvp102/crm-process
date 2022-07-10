@@ -11,7 +11,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 /**
- *
  * @author OSP PC
  */
 @Service
@@ -30,29 +29,29 @@ public class SysMappingMsisdnProcess {
 //        }
     }
     //@Scheduled(cron = "0 0 1 * * ?",zone ="Asia/Bangkok")
-    public static void sysMappingMsisdnProcess() {
-        for (int i = 12; i < 44; i++) {
-            String partitionName = " partition(SYS_P70" + i + ") ";
-            spMappingMsisdnDAO.syncDataMapping(partitionName);
-        }
-//        SysMappingMsisdnProcess mappingMsisdnProcess = new SysMappingMsisdnProcess();
-    }
-
-    class SyncMappingThread extends Thread {
-
-        private String partitionName = "";
-
-        public SyncMappingThread(String id) {
-            this.partitionName = " partition(SYS_P70" + id + ") ";
-        }
-
-        public void run() {
-            try {
-                spMappingMsisdnDAO.syncDataMapping(partitionName);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//    public static void sysMappingMsisdnProcess() {
+//        for (int i = 12; i < 44; i++) {
+//            String partitionName = " partition(SYS_P70" + i + ") ";
+//            spMappingMsisdnDAO.syncDataMapping(partitionName);
+//        }
+////        SysMappingMsisdnProcess mappingMsisdnProcess = new SysMappingMsisdnProcess();
+//    }
+//
+//    class SyncMappingThread extends Thread {
+//
+//        private String partitionName = "";
+//
+//        public SyncMappingThread(String id) {
+//            this.partitionName = " partition(SYS_P70" + id + ") ";
+//        }
+//
+//        public void run() {
+//            try {
+//                spMappingMsisdnDAO.syncDataMapping(partitionName);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
 }

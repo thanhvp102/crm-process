@@ -176,10 +176,10 @@ public class CdrWhitelistDAO {
         return cdrWhiteListViews;
     }
 
-    public Boolean insertCdrWhiteListBatchConfig(String insertWhitelist,List<CdrWhiteListView> cdrWhiteListViews) {
+    public Boolean insertCdrWhiteListBatchConfig(String insertWhitelist,List<CdrWhiteListView> cdrWhiteListViews,List<String> partitions) {
         Connection connection = null;
         PreparedStatement pstmt = null;
-        int sizebatch = 1000;
+        int sizebatch = 100000;
         int rowAdd = 0;
         long timeDebug = System.currentTimeMillis();
 
@@ -209,8 +209,10 @@ public class CdrWhitelistDAO {
                 timeDebug = System.currentTimeMillis();
             }
             connection.commit();
+            log.info("Remove partition: "+partitions.get(0).toString());
+            partitions.remove(0);
             log.info(yyyyMMddhh24miss.format(new Date()) + "  SpMappingMsisdnDAO.insertCdrWhiteListBatchConfig.commit done." + " in (" + (System.currentTimeMillis() - timeDebug) + " ms");
-            connection.setAutoCommit(true);
+//            connection.setAutoCommit(true);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
