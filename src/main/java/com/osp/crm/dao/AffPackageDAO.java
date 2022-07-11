@@ -37,19 +37,19 @@ public class AffPackageDAO {
             log.info(yyyyMMddhh24miss.format(new Date()) + "  AffPackageDAO.getListPackage.start query...");
             pstmt = connection.prepareStatement(" select pck_code, amount, pack_detail, num_expired, status, ratio from aff_package  ");
             resultSet = pstmt.executeQuery();
-            log.info(yyyyMMddhh24miss.format(new Date()) + "  AffTrangsDAO.getTransPackage.end query...");
+            log.info(yyyyMMddhh24miss.format(new Date()) + "  AffTrangsDAO.getPackagePackage.end query...");
             while (resultSet.next()) {
                 AFFPackageView fFPackageView = new AFFPackageView(resultSet.getString(1), resultSet.getLong(2), resultSet.getString(3), resultSet.getLong(4), resultSet.getLong(5), resultSet.getDouble(6));
                 aFFPackageViews.add(fFPackageView);
             }
-            log.info(yyyyMMddhh24miss.format(new Date()) + "  AffTrangsDAO.getTransPackage return list size:" + aFFPackageViews.size());
+            log.info(yyyyMMddhh24miss.format(new Date()) + "  AffTrangsDAO.getPackagePackage return list size:" + aFFPackageViews.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
         return aFFPackageViews;
     }
 
-    public Boolean insertTransBatch(List<AFFPackageView> aFFPackageViews) {
+    public Boolean insertPackageBatch(List<AFFPackageView> aFFPackageViews) {
         Connection connection = null;
         PreparedStatement pstmt = null;
         int sizebatch = 500;
@@ -73,12 +73,12 @@ public class AffPackageDAO {
                 if (rowAdd >= sizebatch) {
                     rowAdd = 0;
                     int[] batch = pstmt.executeBatch();
-                    log.info("AffPackageDAO.insertTransBatch.executeBatch:" + rowAdd + "-" + batch.length);
+                    log.info("AffPackageDAO.insertPackageBatch.executeBatch:" + rowAdd + "-" + batch.length);
                 }
             }
             if (rowAdd > 0) {
                 int[] batch = pstmt.executeBatch();
-                log.info("AffPackageDAO.insertTransBatch.executeBatch2:" + rowAdd + "-" + batch.length);
+                log.info("AffPackageDAO.insertPackageBatch.executeBatch2:" + rowAdd + "-" + batch.length);
             }
             connection.commit();
             connection.setAutoCommit(true);

@@ -74,8 +74,7 @@ public class AffTrangsDAO {
                     + "            TP.USERNAME = P.USERNAME "
                     + "            AND PK.PCK_CODE = TP.PACKAGE_NAME "
                     + "            AND P.STATUS = 1 "
-                    + "            AND PK.STATUS = 1 "
-                    + "            AND TP.REG_TIME < trunc(sysDate)" + strWhere );
+                    + "            AND PK.STATUS = 1 " + strWhere );
             resultSet = pstmt.executeQuery();
             log.info(yyyyMMddhh24miss.format(new Date()) + "  AffTrangsDAO.getTransPackage.end query...");
             while (resultSet.next()) {

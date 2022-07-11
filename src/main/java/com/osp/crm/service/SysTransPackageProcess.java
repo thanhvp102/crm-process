@@ -44,7 +44,7 @@ public class SysTransPackageProcess {
     }
 
         @Scheduled(cron = "0 0 1 * * ?",zone ="Asia/Bangkok")
-//    @Scheduled(fixedDelay = 86400000)
+//    @Scheduled(fixedRate = 86400000)
     public static void sysTransPackageProcess() {
         try {
             SysTransPackageProcess packageProcess = new SysTransPackageProcess();

@@ -30,7 +30,7 @@ public class SysPackageProcess {
             List<AFFPackageView> aFFPackageViews = new ArrayList<>();
             aFFPackageViews = affPackageDAO.getListPackage();
             if (aFFPackageViews != null && aFFPackageViews.size() > 0) {
-                affPackageDAO.insertTransBatch(aFFPackageViews);
+                affPackageDAO.insertPackageBatch(aFFPackageViews);
             }
         } catch (Exception e) {
             e.printStackTrace();

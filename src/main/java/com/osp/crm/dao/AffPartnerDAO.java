@@ -53,12 +53,12 @@ private SimpleDateFormat yyyyMMddhh24miss = new SimpleDateFormat("yyyy-MM-dd HH:
                     + " AFF_CAT_CATALOGY b on a.PROVINCE = b.id  "
                     + " where a.type in (1,2,3,7,8,10,11) and a.status = 1 and ((a.LAST_UPDATED is null and a.gen_date < trunc(sysDate)) or a.LAST_UPDATED < trunc(sysdate)) " + strWhere);
             resultSet = pstmt.executeQuery();
-            log.info(yyyyMMddhh24miss.format(new Date()) + "  AffPartnerDAO.getTransPackage.end query...");
+            log.info(yyyyMMddhh24miss.format(new Date()) + "  AffPartnerDAO.getTransPackage.end query..."+resultSet.getFetchSize());
             while (resultSet.next()) {
                 AFFPartnerView aFFPartnerView = new AFFPartnerView(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3), resultSet.getInt(4), resultSet.getString(5), resultSet.getString(6),
                         resultSet.getString(7), resultSet.getInt(8), resultSet.getString(9), resultSet.getString(10), resultSet.getString(11), resultSet.getString(12), resultSet.getInt(13), resultSet.getString(14),
                         resultSet.getString(15));
-                if(checkExitPartner(aFFPartnerView.getUsername())){
+                if(checkExitPartner(connection,aFFPartnerView.getUsername())){
                     aFFPartnerViews.add(aFFPartnerView);
                 }else{
                     aFFPartnerViewsUpdate.add(aFFPartnerView);
@@ -75,8 +75,10 @@ private SimpleDateFormat yyyyMMddhh24miss = new SimpleDateFormat("yyyy-MM-dd HH:
                     aFFPartnerViewsUpdate.clear();
                 }
             }
+            System.out.println("aFFPartnerViews.size(): "+aFFPartnerViews.size());
+
+            System.out.println("aFFPartnerViewsUpdate.size(): "+aFFPartnerViewsUpdate.size());
             if (aFFPartnerViews != null && aFFPartnerViews.size() > 0) {
-                log.info("aFFPartnerViews.size(): "+aFFPartnerViews.size());
                 insertPartnerBatch(aFFPartnerViews);
             }
             if (aFFPartnerViewsUpdate != null && aFFPartnerViewsUpdate.size() > 0) {
@@ -124,22 +126,18 @@ private SimpleDateFormat yyyyMMddhh24miss = new SimpleDateFormat("yyyy-MM-dd HH:
         }
     }
     
-    public boolean checkExitPartner(String userName) {
-        Connection connection = null;
+    public boolean checkExitPartner( Connection connection,String userName) {
         PreparedStatement pstmt = null;
         ResultSet resultSet = null;
         try {
-            connection = DatabaseSQLReportUtility.getConnection();
             log.info(yyyyMMddhh24miss.format(new Date()) + "  AffPartnerDAO.checkExitPartner.start query...");
-            pstmt = connection.prepareStatement(" select 1 from aff_partner where username = ? ");
+            pstmt = connection.prepareStatement(" select count(1) from aff_partner where username = ? ");
             pstmt.setString(1, userName);
             resultSet = pstmt.executeQuery();
             log.info(yyyyMMddhh24miss.format(new Date()) + "  AffPartnerDAO.checkExitPartner.end query...");
-            while (resultSet.next()) {
-                return false;
-            }
+            return resultSet.getFetchSize()>0;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
         return true;
     }

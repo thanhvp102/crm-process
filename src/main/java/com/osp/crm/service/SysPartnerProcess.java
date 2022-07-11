@@ -40,7 +40,7 @@ public class SysPartnerProcess {
         log.info("PARTNER_CHECK_RELOAD_DATA_BY_CONFIG=" + PARTNER_CHECK_RELOAD_DATA_BY_CONFIG);
     }
     @Scheduled(cron = "0 0 1 * * ?",zone ="Asia/Bangkok")
-//    @Scheduled(fixedDelay = 86400000)
+//    @Scheduled(fixedRate = 86400000)
     public static void sysPartnerProcess() {
         try {
             SysPartnerProcess partnerProcess = new SysPartnerProcess();

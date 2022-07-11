@@ -148,7 +148,7 @@ public class CdrWhitelistDAO {
         return true;
     }
 
-    public List<CdrWhiteListView> syncCdrByPartitionConfig(String partitionName,String configWhiteList) {
+    public List<CdrWhiteListView> syncCdrByPartitionConfig(String partitionName,String configWhiteList,List<String> partitions) {
         Connection connection = null;
         PreparedStatement pstmt = null;
         ResultSet resultSet = null;
@@ -156,8 +156,8 @@ public class CdrWhitelistDAO {
         List<CdrWhiteListView> cdrWhiteListViews = new ArrayList<>();
 
         configWhiteList=("".equals(configWhiteList)) ? yyyyMM.format(new Date()) :configWhiteList;
+        String insertWhiteList = "INSERT INTO cdr_whitelist_" + configWhiteList + "(msisdn_id, gen_date, type_wl, type, msisdn ) VALUES (?, CURDATE() , ?, ?, ? )";
         int i = 0;
-        int countFile = 100000;
         try {
             connection = DatabaseORAUtility.getConnection();
 //            pstmt = connection.prepareStatement(" select /*+ PARALLEL(4) */ a.msisdn_id, a.type_wl, b.msisdn from cdr_whiteList_"+configWhiteList+" partition("+partitionName+") a left join spk_mapping_msisdn_mbf b on a.msisdn_id=b.msisdn_mbf ");
@@ -166,9 +166,19 @@ public class CdrWhitelistDAO {
             while (resultSet.next()) {
                 CdrWhiteListView cdrWhiteListView = new CdrWhiteListView(resultSet.getString(1), yyyyMMdd.format(new Date()), resultSet.getString(2), resultSet.getString(2).equals("C120") ? 1 : 0, resultSet.getString(3));
                 cdrWhiteListViews.add(cdrWhiteListView);
+                i++;
+                if (i % 100000 == 0) {
+                    insertCdrWhiteListBatchConfig(insertWhiteList, cdrWhiteListViews,partitions);
+                    log.info(yyyyMMddhh24miss.format(new Date()) + "  SpMappingMsisdnDAO.syncCdrByPartition add list:" + i);
+                    cdrWhiteListViews.clear();
+                    Thread.sleep(100);
+                }
+            }
+            if (cdrWhiteListViews != null && cdrWhiteListViews.size() > 0) {
+                insertCdrWhiteListBatchConfig(insertWhiteList, cdrWhiteListViews,partitions);
             }
 
-            log.info(yyyyMMddhh24miss.format(new Date()) + "  CdrWhitelistDAO.syncCdrByPartitionConfig size:" + cdrWhiteListViews.size() + " - " +countFile+ " in (" + (System.currentTimeMillis() - timeDebug) + " ms");
+            log.info(yyyyMMddhh24miss.format(new Date()) + "  CdrWhitelistDAO.syncCdrByPartitionConfig size:" + cdrWhiteListViews.size() + " in (" + (System.currentTimeMillis() - timeDebug) + " ms");
 
         } catch (Exception e) {
             e.printStackTrace();

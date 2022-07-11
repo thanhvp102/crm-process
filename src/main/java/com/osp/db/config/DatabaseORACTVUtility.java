@@ -30,7 +30,7 @@ public class DatabaseORACTVUtility {
             cpds.setMinPoolSize(2);
             cpds.setAcquireIncrement(3);
             cpds.setMaxPoolSize(20);
-            cpds.setMaxStatements(0);
+            cpds.setMaxStatements(200);
             //call to time-out and break with an SQLException after the specified number of milliseconds
             cpds.setCheckoutTimeout(0);
             //Defines how many times c3p0 will try to acquire a new Connection from the database before giving up

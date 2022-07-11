@@ -23,7 +23,7 @@ public class DatabaseORAUtility {
     static {
         try {
             cpds.setDataSourceName("oracle.jdbc.pool.OracleDataSource");
-            cpds.setJdbcUrl("jdbc:oracle:thin:@10.10.10.16:9140/PSPACK");
+            cpds.setJdbcUrl("jdbc:oracle:thin:@10.10.10.16:9139/PSPACK");
 //            cpds.setJdbcUrl("jdbc:oracle:thin:@10.38.21.138:1522/PSPACK");
             cpds.setUser("spack");
             cpds.setPassword("SP##89##nBMF");
@@ -31,7 +31,7 @@ public class DatabaseORAUtility {
             cpds.setMinPoolSize(10);
             cpds.setAcquireIncrement(10);
             cpds.setMaxPoolSize(15);
-            cpds.setMaxStatements(0);
+            cpds.setMaxStatements(200);
             //call to time-out and break with an SQLException after the specified number of milliseconds
             cpds.setCheckoutTimeout(0);
             //Defines how many times c3p0 will try to acquire a new Connection from the database before giving up
